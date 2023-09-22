@@ -33,7 +33,6 @@ function Sidebar(props) {
             <NavItem onclick={handleHomeClick}>
                 <FiInstagram />
             </NavItem>
-
             <NavItem onclick={handleHomeClick}>
                 {isSelectedList[0] ? <GoHomeFill /> : <GoHome/>}
             </NavItem>
