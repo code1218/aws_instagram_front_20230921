@@ -28,12 +28,16 @@ function Input({ type, placeholder, name, changeAccount }) {
         }
 
         if(!!regex && !regex.test(value)) {
-            console.log(`${e.target.name}, 매칭되지 않음`);
             setInputState(<><ImCancelCircle /></>);
-            return;
+
+        }else if(!!regex && regex.test(value)) {
+            setInputState(<><BsCheckCircle /></>);
+
+        }else {
+            setInputState("");
         }
 
-        setInputState(<><BsCheckCircle /></>);
+        
     }
 
     const handleInputOnFocus = () => {

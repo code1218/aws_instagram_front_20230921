@@ -32,7 +32,7 @@ function Signup(props) {
 
     const handleSignupSubmit = async () => {
         try{
-            const response = await signup(account);
+            await signup(account);
             navigate("/accounts/login");
 
         } catch(error) {
