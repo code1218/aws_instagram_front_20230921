@@ -4,8 +4,11 @@ import Top from '../../components/Layouts/SignInAndUpLayout/Top/Top';
 import Input from '../../components/Layouts/SignInAndUpLayout/Input/Input';
 import OrBar from '../../components/Layouts/SignInAndUpLayout/OrBar/OrBar';
 import { signup } from '../../apis/api/account';
+import { useNavigate } from 'react-router-dom';
 
 function Signup(props) {
+    const navigate = useNavigate();
+
     const emptyAccount = {
         phoneAndEmail: "",
         name: "",
@@ -30,11 +33,12 @@ function Signup(props) {
     const handleSignupSubmit = async () => {
         try{
             const response = await signup(account);
+            navigate("/accounts/login");
 
         } catch(error) {
             const responseErrorMsg = error.response.data;
             const keys = Object.keys(responseErrorMsg);
-            
+
             if(keys.includes("username")) {
                 setErrorMsg(responseErrorMsg.username);
             }else if(keys.includes("phoneAndEmail")) {
