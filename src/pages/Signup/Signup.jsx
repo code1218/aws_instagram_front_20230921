@@ -14,6 +14,7 @@ function Signup(props) {
     }
     const [ account, setAccount ] = useState(emptyAccount);
     const [ isAccountValuesEmpty, setIsAccountValuesEmpty ] = useState(true);
+    const [ errorMsg, setErrorMsg ] = useState("");
 
     const changeAccount = (name, value) => {
         setAccount({
@@ -26,8 +27,24 @@ function Signup(props) {
         setIsAccountValuesEmpty(Object.values(account).includes(""))
     }, [account])
 
-    const handleSignupSubmit = () => {
-        signup(account);
+    const handleSignupSubmit = async () => {
+        try{
+            const response = await signup(account);
+
+        } catch(error) {
+            const responseErrorMsg = error.response.data;
+            const keys = Object.keys(responseErrorMsg);
+            
+            if(keys.includes("username")) {
+                setErrorMsg(responseErrorMsg.username);
+            }else if(keys.includes("phoneAndEmail")) {
+                setErrorMsg(responseErrorMsg.phoneAndEmail);
+            }else if(keys.includes("name")) {
+                setErrorMsg(responseErrorMsg.name);
+            }else if(keys.includes("password")) {
+                setErrorMsg(responseErrorMsg.password);
+            }
+        }
     }
 
     return (
@@ -48,6 +65,9 @@ function Signup(props) {
                     <button onClick={handleSignupSubmit} disabled={isAccountValuesEmpty}>
                         가입
                     </button>
+                    <div>
+                        {errorMsg}
+                    </div>
                 </div>
             </Top>
 
