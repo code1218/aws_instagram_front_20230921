@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as S from './Style';
-import { NAME, PASSWORD, PHONE_AND_EMAIL, USERNAME } from '../../../../constants/regex';
+import { NAME, PASSWORD, PHONE_OR_EMAIL, USERNAME } from '../../../../constants/regex';
 import { ImCancelCircle } from "react-icons/im";
 import { BsCheckCircle } from "react-icons/bs";
 
@@ -20,7 +20,7 @@ function Input({ type, placeholder, name, changeAccount }) {
         let regex = null;
 
         switch(e.target.name) {
-            case "phoneAndEmail": regex = PHONE_AND_EMAIL; break;
+            case "phoneOrEmail": regex = PHONE_OR_EMAIL; break;
             case "name": regex = NAME; break;
             case "username": regex = USERNAME; break;
             case "password": regex = PASSWORD; break;
