@@ -6,7 +6,7 @@ import OrBar from '../../components/Layouts/SignInAndUpLayout/OrBar/OrBar';
 import { useNavigate } from 'react-router-dom';
 import { signin } from '../../apis/api/account';
 
-function Signin(props) {
+function Signin() {
     const navigate = useNavigate();
 
     const emptyAccount = {
@@ -31,7 +31,9 @@ function Signin(props) {
 
     const handleSigninSubmit = async () => {
         try {
-            await signin(account);
+            const response = await signin(account);
+            localStorage.setItem("accessToken", "Bearer " + response.data);
+            navigate("/");
         } catch(error) {
             setErrorMsg(error.response.data.errorMessage);
         }
