@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { authenticate } from '../apis/api/account';
 import Loading from '../components/Loading/Loading';
 
@@ -10,11 +9,11 @@ function AuthRoute({ element }) {
     const permitAllPath = ["/accounts"];
 
     const authenticateState = useQuery(["authenticate"], authenticate, {
-        retry: 0
+        retry: 0,
+        refetchOnWindowFocus: false
     });
 
     if(authenticateState.isLoading) {
-        console.log("로딩 중...");
         return <Loading />;
     }
 
