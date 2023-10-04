@@ -5,9 +5,12 @@ import Input from '../../components/Layouts/SignInAndUpLayout/Input/Input';
 import OrBar from '../../components/Layouts/SignInAndUpLayout/OrBar/OrBar';
 import { useNavigate } from 'react-router-dom';
 import { signin } from '../../apis/api/account';
+import { useQueryClient } from 'react-query';
+import axios from 'axios';
 
 function Signin() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const emptyAccount = {
         phoneOrEmailOrUsername: "",
@@ -33,7 +36,7 @@ function Signin() {
         try {
             const response = await signin(account);
             localStorage.setItem("accessToken", "Bearer " + response.data);
-            navigate("/");
+            window.location.reload();
         } catch(error) {
             setErrorMsg(error.response.data.errorMessage);
         }
