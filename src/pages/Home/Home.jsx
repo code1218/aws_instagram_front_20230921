@@ -1,6 +1,8 @@
 import React from 'react';
 import { getUser } from '../../apis/api/user';
 import jwt_decode from "jwt-decode";
+import RootContainer from '../../components/Containers/RootContainer/RootContainer';
+import Slider from 'react-slick';
 
 function Home(props) {
     try {
@@ -14,9 +16,9 @@ function Home(props) {
     }
 
     return (
-        <div>
+        <RootContainer>
             
-        </div>
+        </RootContainer>
     );
 }
 
