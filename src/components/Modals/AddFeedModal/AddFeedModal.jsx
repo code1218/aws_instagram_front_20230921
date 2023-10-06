@@ -6,6 +6,7 @@ import ModalHeader from '../ModalHeader/ModalHeader';
 import ModalBody from '../ModalBody/ModalBody';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { HiArrowNarrowLeft } from 'react-icons/hi';
 
 function SelectFeedImg({ setPage, setFiles }) {
     const fileInputRef = useRef();
@@ -75,28 +76,64 @@ function ReviewFeedImg({ files }) {
     )
 }
 
+function FeedDetail({ isShow }) {
+
+    return (
+        <div css={S.FeedDetailContainer(isShow)}>
+
+        </div>
+    )
+}
+
 function AddFeedModal(props) {
     const [ page, setPage ] = useState(1);
     const [ files, setFiles ] = useState([]);
     const [ bodyComponent, setBodyComponent ] = useState(<></>);
+    const [ isShowFeedDetail, setIsShowFeedDetail ] = useState(false);
 
     const [ leftButton, setLeftButton ] = useState(<div></div>);
     const [ rightButton, setRightButton ] = useState(<div></div>);
 
+    const BackButton = () => {
+        return (
+            <div onClick={() => {setPage(page - 1)}}>
+                <HiArrowNarrowLeft />
+            </div>
+        )
+    }
+
+    const NextButton = () => {
+        return (
+            <div onClick={() => {setPage(page + 1)}}>
+                <span>다음</span>
+            </div>
+        )
+    }
+
     useEffect(() => {
         switch(page) {
             case 1:
-                setBodyComponent(<SelectFeedImg setPage={setPage} setFiles={setFiles} />)
+                setBodyComponent(<SelectFeedImg setPage={setPage} setFiles={setFiles} />);
+                setLeftButton(<div></div>);
+                setRightButton(<div></div>);
+                setIsShowFeedDetail(false);
                 break;
             case 2:
-                setBodyComponent(<ReviewFeedImg files={files} />)
+                setBodyComponent(<><ReviewFeedImg files={files} /><FeedDetail isShow={isShowFeedDetail} /></>);
+                setIsShowFeedDetail(false);
+                setLeftButton(BackButton());
+                setRightButton(NextButton());
                 break;
             case 3:
+                setBodyComponent(<><ReviewFeedImg files={files} /><FeedDetail isShow={isShowFeedDetail} /></>);
+                setIsShowFeedDetail(true);
+                setLeftButton(BackButton());
                 break;
             default:
 
         }
-    }, [page]);
+    }, [page, isShowFeedDetail]);
+
 
     return (
         <ModalLayout>

@@ -29,3 +29,12 @@ export const ImgBox = css`
         width: 100%;
     }
 `;
+
+export const FeedDetailContainer = (isShow) => css`
+    transition: all 1s ease;
+    width: ${isShow ? "339" : "0"}px;
+    opacity: ${isShow ? "1" : "0"};
+    height: 396px;
+    overflow: hidden;
+    background-color: black;
+`;

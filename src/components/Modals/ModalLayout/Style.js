@@ -13,7 +13,6 @@ export const SLayout = css`
 
 export const SContainer = css`
     border-radius: 15px;
-    width: 396px;
     height: 420px;
     background-color: #fff;
     overflow: hidden;
